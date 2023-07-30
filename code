@@ -213,7 +213,7 @@ def one_player():
             if correctanswer == True:
                 damage = random.randint(5, 10)
                 playerhealthpoints -= damage
-                print("Computer Knight got it correct! You have taken {0} damage! \nYour hp: {0} \nComputer Knight's hp: {1} \n".format(damage, playerhealthpoints, computerhealthpoints))
+                print("Computer Knight got it correct! You have taken {0} damage! \nYour hp: {1} \nComputer Knight's hp: {2} \n".format(damage, playerhealthpoints, computerhealthpoints))
             else:
                 print("Oh no, Computer Knight got it wrong! \nYour hp: {0} \nComputer Knight's hp: {1} \n".format(playerhealthpoints, computerhealthpoints))
 
@@ -242,7 +242,7 @@ def two_players():
     #players can choose how they wished to be called
     while name1accept != True:
         name1 = input("Please enter Knight 1's name: ")
-        name1confirm = input('Are you satisfied with the name Knight {0}? (y/n)')
+        name1confirm = input('Are you satisfied with the name Knight {0}? (y/n)'.format(name1)
         if name1confirm == 'y':
             print('Welcome Knight {0} to the battleground'.format(name1))
             name1accept = True
@@ -251,7 +251,7 @@ def two_players():
             name1accept = False
     while name2accept != True:
         name2 = input("Please enter Knight 2's name: ")
-        name2confirm = input('Are you satisfied with the name Knight {0}? (y/n)')
+        name2confirm = input('Are you satisfied with the name Knight {0}? (y/n)'.format(name2)
         if name2confirm == 'y':
             print('Welcome Knight {0} to the battleground'.format(name2))
             name2accept = True
@@ -461,7 +461,7 @@ def two_players():
                 if ans == int(correct):
                     damage = random.randint(5, 10)
                     player1healthpoints -= damage
-                    print("Knight {0} got it correct! Knight {1} has taken {2} damage! \nKnight {1}'s hp: {2} \nKnight {3}'s hp: {4} \n".format(name2, name1, damage, name1, player1healthpoints, name2, player2healthpoints))
+                    print("Knight {0} got it correct! Knight {1} has taken {2} damage! \nKnight {3}'s hp: {4} \nKnight {5}'s hp: {6} \n".format(name2, name1, damage, name1, player1healthpoints, name2, player2healthpoints))
                 else:
                     print("Oh no, Knight {0} got it wrong! The correct answer is {1} \nKnight {2}'s hp: {3} \nKnight{4}'s hp: {5} \n".format(name2, correct, name1, player1healthpoints, name2, player2healthpoints))
 
