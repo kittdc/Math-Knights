@@ -194,7 +194,7 @@ def one_player():
                 correct = round((num1 / num2), 1)
 
             if ans == int(correct):
-                damage = random.radint(5, 10)
+                damage = random.randint(5, 10)
                 computerhealthpoints -= damage
                 print("You got it correct! Computer Knight has taken {0} damage! \nYour hp: {1} \nComputer Knight's hp: {2} \n".format(damage, playerhealthpoints, computerhealthpoints))
             else:
@@ -211,7 +211,7 @@ def one_player():
         #computer's turn
         while computerturn == True:
             if correctanswer == True:
-                damage = random.radint(5, 10)
+                damage = random.randint(5, 10)
                 playerhealthpoints -= damage
                 print("Computer Knight got it correct! You have taken {0} damage! \nYour hp: {0} \nComputer Knight's hp: {1} \n".format(damage, playerhealthpoints, computerhealthpoints))
             else:
@@ -395,7 +395,7 @@ def two_players():
                 correct = round((num1 / num2), 1)
 
             if ans == int(correct):
-                damage = random.radint(5, 10)
+                damage = random.randint(5, 10)
                 player2healthpoints -= damage
                 print("Knight {0} got it correct! Knight {1} has taken {2} damage! \nKnight {3}'s: {4} \nKnight {5}'s hp: {6} \n".format(name1, name2, damage, name1, player1healthpoints, name2, player2healthpoints))
             else:
@@ -459,7 +459,7 @@ def two_players():
                     correct = round((num1 / num2), 1)
 
                 if ans == int(correct):
-                    damage = random.radint(5, 10)
+                    damage = random.randint(5, 10)
                     player1healthpoints -= damage
                     print("Knight {0} got it correct! Knight {1} has taken {2} damage! \nKnight {1}'s hp: {2} \nKnight {3}'s hp: {4} \n".format(name2, name1, damage, name1, player1healthpoints, name2, player2healthpoints))
                 else:
