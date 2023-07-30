@@ -1,0 +1,486 @@
+def one_player():
+    import random
+    playerhealthpoints = 100
+    computerhealthpoints = 100
+    choice = -1
+    accuracy = 0
+    selected = 0
+    chosen = None
+    pick = None
+    startnumvalid = None
+    endnumvalid = None
+    damage = 0
+
+    #players are able to choose bot's accuracy
+    while chosen != True:
+        print('Choose computer accuracy: \n 1. 100% \n 2. 90% \n 3. 80% \n 4. 70% \n 5. 60% \n 6. 50%')
+        choice = input('Enter choice: ')
+        if choice.isdigit():
+            choice = int(choice)
+
+            #100% accuracy
+            if choice == 1:
+                print('100% accuracy chosen')
+                chosen = True
+                accuracy = 100
+
+            #90% accuracy
+            elif choice == 2:
+                print('90% accuracy chosen')
+                chosen = True
+                accuracy = 90
+
+            #80% accuracy
+            elif choice == 3:
+                print('80% accuracy chosen')
+                chosen = True
+                accuracy = 80
+
+            #70% accuracy
+            elif choice == 4:
+                print('70% accuracy chosen')
+                chosen = True
+                accuracy = 70
+
+            #60% accuracy
+            elif choice == 5:
+                print('60% accuracy chosen')
+                chosen = True
+                accuracy = 60
+
+            #50% accuracy
+            elif choice == 6:
+                print('50% accuracy chosen')
+                chosen = True
+                accuracy = 50
+
+            #invalid choice
+            elif choice != 0:
+                print('Invalid Choice!')
+                chosen = False
+
+        #not a digit
+        else:
+            print('Invalid! Please type a number between 1 to 6!')
+            chosen = False
+    print("")
+
+    #players can choose which function they wish to train
+    while pick != True:
+        print('Choose a function: \n 1. Addition (+) \n 2. Subtraction (-) \n 3. Multiplication (*) \n 4. Division (/) \n 5. Random (+-*/)')
+        function = input('Enter choice: ')
+        if function.isdigit():
+            function = int(function)
+
+            #player chose addition
+            if function == 1:
+                print('Addition (+) chosen')
+                pick = True
+                selected = 1
+
+            #player chose subtraction
+            elif function == 2:
+                print('Subtraction (-) chosen')
+                pick = True
+                selected = 2
+
+            #player chose multiplication
+            elif function == 3:
+                print('Multiplication (*) chosen')
+                pick = True
+                selected = 3
+
+            #player chose division
+            elif function == 4:
+                print('Division (/) chosen')
+                pick = True
+                selected = 4
+
+            #player chose random
+            elif function == 5:
+                print('Random (+-*/) chosen')
+                pick = True
+                selected = 5
+
+            #invalid choice
+            else:
+                print('Invalid Choice!')
+                pick = False
+
+        #not a digit
+        else:
+            print('Invalid Choice!')
+            pick = False
+    print("")
+
+    #players can choose what range of numbers they wish to train
+    while startnumvalid != True or endnumvalid != True:
+        print('Please input a starting and ending number. For example starting = 1 and ending = 10, the range of numbers will be 1 or 10 or any numbers within the range')
+        startnum = input("Input Starting: ")
+        endnum = input("Input Ending: ")
+        if startnum.isdigit():
+            startnumvalid = True
+            startnum = int(startnum)
+        else:
+            print('Starting number is invalid!')
+
+        if endnum.isdigit():
+            endnumvalid = True
+            endnum = int(endnum)
+        else:
+            print('Ending number is invalid!')
+
+    #actual game
+    while True:
+        #will end the game if any of the hp drop to or below 0
+        if playerhealthpoints <= 0 or computerhealthpoints <= 0:
+            break
+
+        #player goes first
+        playerturn = True
+
+        #deciding whether the computer would get the question right or wrong
+        caccuracy = random.randint(1, 100)
+        if caccuracy > accuracy:
+            correctanswer = False
+        else:
+            correctanswer = True
+
+        #random numbers within the range of what the player gave
+        num1 = random.randint(startnum, endnum)
+        num2 = random.randint(startnum, endnum)
+
+        #if player chose the 'Random' function
+        if selected == 5:
+            selectedfunction = random.randint(1,4)
+        else:
+            selectedfunction = selected
+
+        #player's turn
+        while playerturn != False:
+
+            #addition
+            if selectedfunction == 1:
+                ans = input("{0} + {1} = ".format(num1, num2))
+                if ans.isdigit():
+                    ans = int(ans)
+                else:
+                    print('Invalid answer! Input should be numbers!')
+                correct = num1 + num2
+
+            #subtraction
+            elif selectedfunction == 2:
+                ans = input("{0} - {1} = ".format(num1, num2))
+                if not ans.isdigit():
+                    print('Invalid answer! Input should be numbers!')
+                correct = str(num1 - num2)
+
+            #multiplication
+            elif selectedfunction == 3:
+                ans = input("{0} * {1} = ".format(num1, num2))
+                if ans.isdigit():
+                    ans = int(ans)
+                else:
+                    print('Invalid answer! Input should be numbers!')
+                correct = num1 * num2
+
+            #division
+            elif selectedfunction == 4:
+                ans = input("Answer should be in one decimal place! \n{0} / {1} = ".format(num1, num2))
+                if ans.isdigit():
+                    ans = float(ans)
+                else:
+                    print('Invalid answer! Input should be numbers!')
+                correct = round((num1 / num2), 1)
+
+            if ans == int(correct):
+                damage = random.radint(5, 10)
+                computerhealthpoints -= damage
+                print("You got it correct! Computer Knight has taken {0} damage! \nYour hp: {1} \nComputer Knight's hp: {2} \n".format(damage, playerhealthpoints, computerhealthpoints))
+            else:
+                print("Oh no, you got it wrong! The correct answer is {0} \nYour hp: {1} \nComputer Knight's hp: {2} \n".format(correct, playerhealthpoints, computerhealthpoints))
+
+            #no matter right or wrong, computer will go next
+            playerturn = False
+            computerturn = True
+
+        #will end the game if any of the hp drop to or below 0
+        if playerhealthpoints <= 0 or computerhealthpoints <= 0:
+                break
+
+        #computer's turn
+        while computerturn == True:
+            if correctanswer == True:
+                damage = random.radint(5, 10)
+                playerhealthpoints -= damage
+                print("Computer Knight got it correct! You have taken {0} damage! \nYour hp: {0} \nComputer Knight's hp: {1} \n".format(damage, playerhealthpoints, computerhealthpoints))
+            else:
+                print("Oh no, Computer Knight got it wrong! \nYour hp: {0} \nComputer Knight's hp: {1} \n".format(playerhealthpoints, computerhealthpoints))
+
+            #computer's turn ends
+            computerturn = False
+
+    #win/lose message
+    if computerhealthpoints <= 0:
+        print('You win!')
+    else:
+        print('Computer Knight wins!')
+
+def two_players():
+    import random
+    player1healthpoints = 100
+    player2healthpoints = 100
+    selected = 0
+    chosenfunction = ''
+    pick = None
+    chosen = None
+    startnumvalid = None
+    endnumvalid = None
+    name1accept = True
+    name2accept = True
+
+    #players can choose how they wished to be called
+    while name1accept != True:
+        name1 = input("Please enter Knight 1's name: ")
+        name1confirm = input('Are you satisfied with the name Knight {0}? (y/n)')
+        if name1confirm == 'y':
+            print('Welcome Knight {0} to the battleground'.format(name1))
+            name1accept = True
+        else:
+            print('Please re-enter another name.')
+            name1accept = False
+    while name2accept != True:
+        name2 = input("Please enter Knight 2's name: ")
+        name2confirm = input('Are you satisfied with the name Knight {0}? (y/n)')
+        if name2confirm == 'y':
+            print('Welcome Knight {0} to the battleground'.format(name2))
+            name2accept = True
+        else:
+            name2accept = False
+
+    #players can choose which function they wish to train
+    while chosen != True:
+        while pick != True:
+            print('Choose a function: \n 1. Addition (+) \n 2. Subtraction (-) \n 3. Multiplication (*) \n 4. Division (/) \n 5. Random (+-*/)')
+            function = input('Enter choice: ')
+            if function.isdigit():
+                function = int(function)
+
+                #player 1 chose addition
+                if function == 1:
+                    print('Addition (+) chosen')
+                    pick = True
+                    selected = 1
+                    chosenfunction = 'Addition'
+
+                #player 1 chose subtraction
+                elif function == 2:
+                    print('Subtraction (-) chosen')
+                    pick = True
+                    selected = 2
+                    chosenfunction = 'Subtraction'
+
+                #player 1 chose multiplication
+                elif function == 3:
+                    print('Multiplication (*) chosen')
+                    pick = True
+                    selected = 3
+                    chosenfunction = 'Multiplication'
+
+                #player 1 chose division
+                elif function == 4:
+                    print('Division (/) chosen')
+                    pick = True
+                    selected = 4
+                    chosenfunction = 'Division'
+
+                #player 1 chose random
+                elif function == 5:
+                    print('Random (+-*/) chosen')
+                    pick = True
+                    selected = 5
+                    chosenfunction = 'Random'
+
+                #invalid choice
+                else:
+                    print('Invalid Choice!')
+                    pick = False
+
+            #not a digit
+            else:
+                print('Invalid Choice!')
+                pick = False
+
+        #make sure they both agree on the function chosen
+        agree = input("Knight {0} has chosen the {1} function, Knight {2} do you agree? y/n".format(name1, chosenfunction, name2))
+        if agree == 'y':
+            chosen = True
+        else:
+            pick = False
+            chosen = False
+
+    print("")
+
+    #players can choose what range of numbers they wish to train
+    while startnumvalid != True or endnumvalid != True:
+        print('Please input a starting and ending number. For example starting = 1 and ending = 10, the range of numbers will be 1 or 10 or any numbers within the range')
+        startnum = input("Input Starting: ")
+        endnum = input("Input Ending: ")
+        if startnum.isdigit():
+            startnumvalid = True
+            startnum = int(startnum)
+        else:
+            print('Starting number is invalid!')
+
+        if endnum.isdigit():
+            endnumvalid = True
+            endnum = int(endnum)
+        else:
+            print('Ending number is invalid!')
+
+    #actual game
+    while True:
+        #will end the game if any of the hp drop to or below 0
+        if player1healthpoints <= 0 or player2healthpoints <= 0:
+            break
+
+        #player 1 goes first
+        player1turn = True
+
+        #random numbers within the range of what the players gave
+        num1 = random.randint(startnum, endnum)
+        num2 = random.randint(startnum, endnum)
+
+        #if players chose the 'Random' function
+        if selected == 5:
+            selectedfunction = random.randint(1,4)
+        else:
+            selectedfunction = selected
+
+        #player 1's turn
+        while player1turn != False:
+
+            #addition
+            if selectedfunction == 1:
+                ans = input("{0} + {1} = ".format(num1, num2))
+                if ans.isdigit():
+                    ans = int(ans)
+                else:
+                    print('Invalid answer! Input should be numbers!')
+                correct = num1 + num2
+
+            #subtraction
+            elif selectedfunction == 2:
+                ans = input("{0} - {1} = ".format(num1, num2))
+                if not ans.isdigit():
+                    print('Invalid answer! Input should be numbers!')
+                correct = str(num1 - num2)
+
+            #multiplication
+            elif selectedfunction == 3:
+                ans = input("{0} * {1} = ".format(num1, num2))
+                if ans.isdigit():
+                    ans = int(ans)
+                else:
+                    print('Invalid answer! Input should be numbers!')
+                correct = num1 * num2
+
+            #division
+            elif selectedfunction == 4:
+                ans = input("Answer should be in one decimal place! \n{0} / {1} = ".format(num1, num2))
+                if ans.isdigit():
+                    ans = float(ans)
+                else:
+                    print('Invalid answer! Input should be numbers!')
+                correct = round((num1 / num2), 1)
+
+            if ans == int(correct):
+                damage = random.radint(5, 10)
+                player2healthpoints -= damage
+                print("Knight {0} got it correct! Knight {1} has taken {2} damage! \nKnight {3}'s: {4} \nKnight {5}'s hp: {6} \n".format(name1, name2, damage, name1, player1healthpoints, name2, player2healthpoints))
+            else:
+                print("Oh no, Knight {0} got it wrong! The correct answer is {1} \nKnight {2}'s hp: {3} \nKnight {4}'s hp: {5} \n".format(name1, correct, name1, player1healthpoints, name2, player2healthpoints))
+
+            #no matter right or wrong, player 2 will go next
+            player1turn = False
+            player2turn = True
+
+        #will end the game if any of the hp drop to or below 0
+        if player1healthpoints <= 0 or player2healthpoints <= 0:
+                break
+
+        #Player 2's turn
+        while player2turn == True:
+            #random numbers within the range of what the players gave
+            num1 = random.randint(startnum, endnum)
+            num2 = random.randint(startnum, endnum)
+
+            #if players chose the 'Random' function
+            if selected == 5:
+                selectedfunction = random.randint(1,4)
+            else:
+                selectedfunction = selected
+
+            #player 1's turn
+            while player1turn != False:
+
+                #addition
+                if selectedfunction == 1:
+                    ans = input("{0} + {1} = ".format(num1, num2))
+                    if ans.isdigit():
+                        ans = int(ans)
+                    else:
+                        print('Invalid answer! Input should be numbers!')
+                    correct = num1 + num2
+
+                #subtraction
+                elif selectedfunction == 2:
+                    ans = input("{0} - {1} = ".format(num1, num2))
+                    if not ans.isdigit():
+                        print('Invalid answer! Input should be numbers!')
+                    correct = str(num1 - num2)
+
+                #multiplication
+                elif selectedfunction == 3:
+                    ans = input("{0} * {1} = ".format(num1, num2))
+                    if ans.isdigit():
+                        ans = int(ans)
+                    else:
+                        print('Invalid answer! Input should be numbers!')
+                    correct = num1 * num2
+
+                #division
+                elif selectedfunction == 4:
+                    ans = input("Answer should be in one decimal place! \n{0} / {1} = ".format(num1, num2))
+                    if ans.isdigit():
+                        ans = float(ans)
+                    else:
+                        print('Invalid answer! Input should be numbers!')
+                    correct = round((num1 / num2), 1)
+
+                if ans == int(correct):
+                    damage = random.radint(5, 10)
+                    player1healthpoints -= damage
+                    print("Knight {0} got it correct! Knight {1} has taken {2} damage! \nKnight {1}'s hp: {2} \nKnight {3}'s hp: {4} \n".format(name2, name1, damage, name1, player1healthpoints, name2, player2healthpoints))
+                else:
+                    print("Oh no, Knight {0} got it wrong! The correct answer is {1} \nKnight {2}'s hp: {3} \nKnight{4}'s hp: {5} \n".format(name2, correct, name1, player1healthpoints, name2, player2healthpoints))
+
+    #win/lose message
+    if player2healthpoints <= 0:
+        print('Knight {0} has won the duel!'.format(name1))
+    else:
+        print('Knight {0} has won the duel!'.format(name2))
+
+#asking if person is playing single player or 2 players
+accept = None
+while accept != True:
+    question = input('Are you playing 1. Single Player (You versus Computer) or 2. Duel Mode (You versus a Friend)? Type your choice 1 or 2: ')
+    if question == '1':
+        one_player()
+        accept = True
+    elif question == '2':
+        two_players()
+        accept = True
+    else:
+        print('Invalid Choice!')
+        accept = False
