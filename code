@@ -464,6 +464,10 @@ def two_players():
                     print("Knight {0} got it correct! Knight {1} has taken {2} damage! \nKnight {3}'s hp: {4} \nKnight {5}'s hp: {6} \n".format(name2, name1, damage, name1, player1healthpoints, name2, player2healthpoints))
                 else:
                     print("Oh no, Knight {0} got it wrong! The correct answer is {1} \nKnight {2}'s hp: {3} \nKnight{4}'s hp: {5} \n".format(name2, correct, name1, player1healthpoints, name2, player2healthpoints))
+            
+            #no matter right or wrong, player 1 will go next
+            player2turn = False
+            player1turn = True
 
     #win/lose message
     if player2healthpoints <= 0:
