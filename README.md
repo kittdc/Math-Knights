@@ -1,2 +1,2 @@
 # Math-Knights
-Submission for a school graded computing project
+A simple math game I created for a school graded computing project
