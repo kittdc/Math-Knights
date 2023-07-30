@@ -236,8 +236,8 @@ def two_players():
     chosen = None
     startnumvalid = None
     endnumvalid = None
-    name1accept = True
-    name2accept = True
+    name1accept = None
+    name2accept = None
 
     #players can choose how they wished to be called
     while name1accept != True:
